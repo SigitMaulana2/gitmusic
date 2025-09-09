@@ -1,0 +1,608 @@
+/* ==== Background animasi bintang ==== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif; /* Font modern */
+  background: #0a0a1a;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+.stars, .twinkling {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: -1;
+}
+
+.stars {
+  background: transparent url('https://www.script-tutorials.com/demos/360/images/stars.png') repeat;
+  animation: moveStars 100s linear infinite;
+}
+.twinkling {
+  background: transparent url('https://www.script-tutorials.com/demos/360/images/twinkling.png') repeat;
+  animation: moveTwinkling 200s linear infinite;
+}
+/* Modal Responsive */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 95vw;
+    left: 2.5vw;
+    right: 2.5vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 12px;
+    margin: 0;
+    border-radius: 10px;
+  }
+  .modal {
+    align-items: flex-start;
+    padding-top: 10vh;
+  }
+  .modal-video-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-image {
+    max-width: 80vw;
+    height: auto;
+  }
+}
+
+/* Mini Player Responsive */
+@media (max-width: 600px) {
+  .mini-player {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: 95vw;
+    border-radius: 14px;
+    padding: 10px 6px;
+    font-size: 0.9rem;
+    z-index: 999;
+  }
+  .mini-player .controls {
+    gap: 5px;
+  }
+  .mini-player #miniTitle {
+    font-size: 0.8rem;
+    max-width: 60vw;
+  }
+}
+
+/* Modal & Mini-player background adapt to theme */
+body.light-mode .modal-content,
+body.light-mode .mini-player {
+  background: rgba(255,255,255,0.97);
+  color: #222;
+}
+body.night-mode .modal-content,
+body.night-mode .mini-player {
+  background: rgba(24,26,32,0.95);
+  color: #fff;
+  border: 1px solid #333;
+}
+
+/* Modal close button lebih kecil di mobile */
+@media (max-width: 600px) {
+  .close {
+    font-size: 1.5rem;
+    right: 10px;
+    top: 10px;
+  }
+}
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: -10000px 5000px; }
+}
+@keyframes moveTwinkling {
+  from { background-position: 0 0; }
+  to { background-position: 10000px -5000px; }
+}
+
+/* ==== Header Animasi ==== */
+header {
+  padding: 40px 20px;
+}
+header h1 {
+  font-family: 'Montserrat', sans-serif; /* Font modern untuk judul */
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ffcc00, #ff0066);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeSlide 1s ease forwards;
+  animation-delay: 0.2s;
+}
+header h2 {
+  font-family: 'Montserrat', sans-serif; /* Font modern untuk sub-judul */
+  font-size: 1.5rem;
+  color: #ffcc00;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeSlide 1s ease forwards;
+  animation-delay: 1s;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==== Grid Card Lagu ==== */
+.lagu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 90%;
+  margin: auto;
+}
+.card {
+  /* Glassmorphism Card */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0;
+  transform: translateY(30px);
+  cursor: pointer;
+  position: relative; /* Untuk border gradien */
+  overflow: hidden; /* Untuk border gradien */
+  transform-style: preserve-3d; /* Untuk 3D Tilt */
+}
+.card.show {
+  animation: rowFade 0.8s ease forwards;
+}
+@keyframes rowFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 0, 150, 0.8);
+}
+.card h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Styling untuk gambar di card */
+.card-image {
+  width: 100%;
+  height: auto; /* Menjaga rasio aspek */
+  border-radius: 12px;
+  outline: none;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+  object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
+}
+.card-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 150, 0.8);
+}
+
+/* Hapus styling video yang tidak lagi digunakan di card */
+/* video {
+  width: 100%;
+  border-radius: 12px;
+  outline: none;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+}
+video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 150, 0.8);
+} */
+
+
+/* ==== Modal ==== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(5px);
+}
+.modal-content {
+  /* Glassmorphism Modal */
+  background: rgba(30, 30, 50, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 25px;
+  margin: 5% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  animation: fadeSlide 0.5s ease;
+}
+.modal-content h2 {
+  margin-bottom: 15px;
+  color: #ffcc00;
+}
+/* Styling untuk audio di modal */
+.modal-content audio { /* Ubah dari video */
+  width: 100%;
+  margin-bottom: 15px;
+}
+.modal-content p {
+  font-size: 1rem;
+  color: #ddd;
+  line-height: 1.5;
+}
+.close {
+  position: absolute;
+  top: 20px; right: 30px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+.close:hover {
+  color: #ff0066;
+}
+
+/* ==== Responsif ==== */
+@media (max-width: 768px) {
+  header h1 { font-size: 2rem; }
+  header h2 { font-size: 1.2rem; }
+  .lagu-container { gap: 15px; }
+  .card { padding: 15px; }
+}
+
+/* Wrapper audio + tombol navigasi */
+.modal-video-wrapper { /* Nama kelas tetap sama untuk kompatibilitas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-video-wrapper audio { /* Ubah dari video */
+  flex: 1;
+  max-width: 90%;
+  border-radius: 12px;
+}
+
+/* Tombol Navigasi */
+.nav-btn {
+  background: rgba(255, 0, 102, 0.7);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 204, 0, 0.9);
+  transform: scale(1.2);
+}
+
+@media (max-width: 600px) {
+  .modal-video-wrapper {
+    flex-direction: column;
+  }
+  .nav-btn {
+    font-size: 1.5rem;
+    padding: 8px 12px;
+  }
+}
+/* Progress Bar */
+#progressBar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  margin: 10px 0 15px;
+  overflow: hidden;
+}
+#progressFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff0066, #ffcc00);
+  transition: width 0.2s linear;
+}
+
+/* Karaoke Lyrics */
+#karaokeLyrics {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  text-align: left;
+  color: #aaa;
+  line-height: 1.6;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  border-left: 3px solid #ff0066;
+}
+#karaokeLyrics span {
+  display: block;
+  margin: 5px 0;
+  transition: color 0.3s, transform 0.3s;
+}
+#karaokeLyrics span.active {
+  color: #ffcc00;
+  font-weight: bold;
+  transform: scale(1.05);
+}
+/* Search Bar */
+.search-container {
+  margin: 20px auto;
+  text-align: center;
+}
+.search-container input {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  box-shadow: 0 0 10px rgba(255,0,102,0.6);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.search-container input:focus {
+  box-shadow: 0 0 20px rgba(255,204,0,0.9);
+  transform: scale(1.05);
+}
+
+/* Glow Effect Judul */
+header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ffcc00, #ff0066);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowPulse 2s infinite alternate, fadeSlide 1s ease forwards;
+  text-shadow: 0 0 10px rgba(255,0,102,0.7), 0 0 20px rgba(255,204,0,0.8);
+}
+
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 10px rgba(255,0,102,0.6), 0 0 20px rgba(255,204,0,0.6);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255,0,102,1), 0 0 40px rgba(255,204,0,1);
+  }
+}
+
+/* ==== Animated Gradient Border ==== */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Mengubah dari -2px menjadi 0 untuk border di dalam */
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(120deg, rgba(255,0,128,0.3), rgba(121,40,202,0.3), rgba(0,225,255,0.3), rgba(255,204,0,0.3));
+  background-size: 300% 300%;
+  animation: borderGradient 8s ease infinite;
+  z-index: -1; /* penting: biar nggak nutup konten */
+}
+
+@keyframes borderGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==== Tilt Hover (smooth transform) ==== */
+.card.tilt {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* ==== Toggle Button ==== */
+.theme-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 200;
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: background 0.3s, transform 0.2s;
+}
+.theme-btn:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+/* ==== Light Mode Styles ==== */
+body.light {
+  background: #f8f8f8;
+  color: #222;
+}
+body.light header h1 {
+  -webkit-text-fill-color: #ff0066;
+  text-shadow: 0 0 5px rgba(255,0,102,0.5);
+}
+body.light .card {
+  background: rgba(255, 255, 255, 0.8);
+  color: #222;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+body.light .modal-content {
+  background: rgba(255,255,255,0.9);
+  color: #222;
+}
+body.light .theme-btn {
+  color: #222;
+}
+
+/* ==== Particles Background ==== */
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+/* ==== Floating Mini Player ==== */
+.mini-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(30, 30, 50, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  z-index: 1000;
+  width: 280px;
+  color: white;
+}
+
+.mini-player audio { /* Ubah dari video */
+  display: none; /* hanya audio yang dipakai */
+}
+
+.mini-player .controls {
+  display: flex;
+  gap: 8px;
+}
+
+.mini-player button {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.mini-player button:hover {
+  background: rgba(255,255,255,0.25);
+  transform: scale(1.1);
+}
+
+.mini-player #miniTitle {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==== Wave Visualizer ==== */
+.wave {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.wave span {
+  display: block;
+  width: 3px;
+  background: #ffcc00;
+  border-radius: 3px;
+  animation: waveAnim 1s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.wave span:nth-child(1) { animation-delay: 0s; }
+.wave span:nth-child(2) { animation-delay: 0.2s; }
+.wave span:nth-child(3) { animation-delay: 0.4s; }
+.wave span:nth-child(4) { animation-delay: 0.6s; }
+.wave span:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes waveAnim {
+  0%, 100% { height: 4px; }
+  50% { height: 20px; }
+}
+
+/* Pause wave saat musik berhenti */
+.wave.paused span {
+  animation-play-state: paused;
+}
+
+/* Styling untuk tombol WhatsApp */
+.contact-service {
+  margin: 40px auto 80px auto; /* Tambahkan margin bawah agar tidak tumpang tindih dengan mini-player */
+  text-align: center;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  background: linear-gradient(45deg, #25D366, #128C7E); /* Warna WhatsApp */
+  color: white;
+  padding: 15px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+/* Modal Controls Responsive untuk Mobile */
+@media (max-width: 600px) {
+  .modal-video-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px 0;
+  }
+  .modal-video-wrapper button.nav-btn {
+    font-size: 1.8rem;
+    padding: 6px 12px;
+    border-radius: 50%;
+    background: #f4f4f4;
+    color: #222;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+  }
+  body.night-mode .modal-video-wrapper button.nav-btn {
+    background: #23272f;
+    color: #fff;
+    border: 1px solid #444;
+  }
+  .modal-video-wrapper audio {
+    width: 60vw;
+    max-width: 260px;
+    border-radius: 8px;
+    margin: 0 8px;
+    background: #fff;
+  }
+}

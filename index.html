@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GITMUSIC</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Background bintang -->
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+
+  <!-- Judul -->
+  <header>
+    <h1>GITMUSIC</h1>
+    <h2>playing music kesukaan mu</h2>
+  </header>
+
+  <!-- Toggle Dark/Light Mode -->
+  <button id="themeToggle" class="theme-btn">🌙</button>
+
+  <!-- Search bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Cari judul lagu...">
+  </div>
+
+  <!-- Grid Lagu -->
+  <section class="lagu-container" id="laguContainer">
+    <!-- Card akan di-generate oleh JavaScript -->
+  </section>
+  
+  <!-- Modal Popup -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" id="closeBtn">&times;</span>
+      <h2 id="modalTitle"></h2>
+      
+      <!-- Progress bar -->
+      <div id="progressBar">
+        <div id="progressFill"></div>
+      </div>
+      
+      <div class="modal-video-wrapper">
+        <button class="nav-btn" id="modalPrevBtn">&#10094;</button>
+        <audio id="modalAudio" controls></audio> <!-- Ubah dari video -->
+        <button class="nav-btn" id="modalNextBtn">&#10095;</button>
+      </div>
+      
+      <!-- Karaoke lyrics -->
+      <div id="karaokeLyrics"></div>
+    </div>
+  </div>
+
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- Kontak Servis WhatsApp -->
+  <div class="contact-service">
+    <a href="https://wa.me/6285882461914" target="_blank" class="whatsapp-btn">
+  Hubungi Kami (WhatsApp)
+</a>
+  </div>
+
+  <!-- Tambahkan script particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+  <!-- Floating Mini Player -->
+  <div class="mini-player" id="miniPlayer">
+    <audio id="miniAudio"></audio> <!-- Ubah dari video -->
+    <div class="controls">
+      <button id="miniPrevBtn">⏮️</button>
+      <button id="miniPlayPauseBtn">▶️</button>
+      <button id="miniNextBtn">⏭️</button>
+    </div>
+    <span id="miniTitle"></span> <!-- Judul akan diatur oleh JS -->
+    <div class="wave" id="wave">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+    <!-- Link ke file JavaScript yang terpisah -->
+  <script src="musicData.js"></script> <!-- PASTIKAN INI PERTAMA -->
+  <script src="main.js"></script>
+  <script src="miniPlayer.js"></script>
+  <script src="lyricsData.js"></script>
+
+</body>
+</html>
